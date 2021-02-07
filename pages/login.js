@@ -73,7 +73,7 @@ const login = () => {
           </Button>
           <p className="lead my-3">
             New User??
-            <Link href="/login">Click here</Link> to sign up.
+            <Link href="/signup">Click here</Link> to sign up.
           </p>
         </Form>
       </FormContainer>
