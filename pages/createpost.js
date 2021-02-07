@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import { MY_BLOG_POSTS } from '../graphql/query'
 import Meta from '../components/Meta'
 import { isLoggedIn } from '../lib/auth'
-import { C_URL } from '../config'
+import { C_URL } from '../config/config'
 
 const createpost = () => {
   const router = useRouter()

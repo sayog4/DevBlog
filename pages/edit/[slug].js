@@ -13,7 +13,7 @@ import { BLOG_BY_SLUG_EDIT } from '../../graphql/query'
 import { UPDATE_BLOG_POST } from '../../graphql/mutation'
 import Meta from '../../components/Meta'
 import { isLoggedIn } from '../../lib/auth'
-import { C_URL } from '../../config'
+import { C_URL } from '../../config/config'
 
 const editPost = ({ query }) => {
   const router = useRouter()
