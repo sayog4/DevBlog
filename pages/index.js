@@ -1,65 +1,42 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import React from 'react'
+import { useQuery } from '@apollo/client'
+import { Button } from 'react-bootstrap'
+
+import Loader from '../components/Loader'
+import Message from '../components/Message'
+import Blog from '../components/Blog'
+import Meta from '../components/Meta'
+import { BLOGS } from '../graphql/query'
 
 export default function Home() {
+  const { error, loading, data, fetchMore } = useQuery(BLOGS, {
+    variables: { cursor: null }
+  })
+
+  if (loading) return <Loader />
+  if (error) return <Message variant="danger">{error.message}</Message>
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
+    <React.Fragment>
+      <Meta />
+      <div className="py-4">
+        {data &&
+          data.blogs.blogs.map(blog => <Blog key={blog.id} blog={blog} />)}
+        {data && data.blogs.hasNextPage && (
+          <Button
+            onClick={async () => {
+              await fetchMore({
+                variables: {
+                  cursor: data.blogs.cursor
+                }
+              })
+            }}
+            variant="primary"
           >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+            Load More
+          </Button>
+        )}
+      </div>
+    </React.Fragment>
   )
 }
