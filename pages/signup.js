@@ -54,7 +54,7 @@ const register = () => {
             <Form.Label>Name</Form.Label>
             <Form.Control
               type="text"
-              required="true"
+              required={true}
               placeholder="Enter Your Name"
               value={name}
               onChange={e => setName(e.target.value)}
@@ -64,7 +64,7 @@ const register = () => {
             <Form.Label>Email</Form.Label>
             <Form.Control
               type="email"
-              required="true"
+              required={true}
               placeholder="Enter Your Email"
               value={email}
               onChange={e => setEmail(e.target.value)}
@@ -74,7 +74,7 @@ const register = () => {
             <Form.Label>Password</Form.Label>
             <Form.Control
               type="password"
-              required="true"
+              required={true}
               placeholder="Enter Your Password"
               value={password}
               onChange={e => setPassword(e.target.value)}
