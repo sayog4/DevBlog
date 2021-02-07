@@ -1,1 +1,1 @@
-# [DevBlog]('https://dev-blog-gamma.vercel.app/)
+# [DevBlog]('https://dev-blog-gamma.vercel.app/')
