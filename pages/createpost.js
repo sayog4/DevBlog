@@ -12,7 +12,6 @@ import { useRouter } from 'next/router'
 import { MY_BLOG_POSTS } from '../graphql/query'
 import Meta from '../components/Meta'
 import { isLoggedIn } from '../lib/auth'
-import { C_URL } from '../config/config'
 
 const createpost = () => {
   const router = useRouter()
@@ -31,7 +30,7 @@ const createpost = () => {
     data.append('file', file)
     data.append('upload_preset', 'gql_blog')
 
-    return fetch(C_URL, {
+    return fetch(process.env.NEXT_PUBLIC_C_URL, {
       method: 'POST',
       body: data
     })

@@ -13,7 +13,6 @@ import { BLOG_BY_SLUG_EDIT } from '../../graphql/query'
 import { UPDATE_BLOG_POST } from '../../graphql/mutation'
 import Meta from '../../components/Meta'
 import { isLoggedIn } from '../../lib/auth'
-import { C_URL } from '../../config/config'
 
 const editPost = ({ query }) => {
   const router = useRouter()
@@ -32,7 +31,7 @@ const editPost = ({ query }) => {
     data.append('file', file)
     data.append('upload_preset', 'gql_blog')
 
-    return fetch(C_URL, {
+    return fetch(process.env.NEXT_PUBLIC_C_URL, {
       method: 'POST',
       body: data
     })
